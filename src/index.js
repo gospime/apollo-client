@@ -10,22 +10,29 @@ const onError = require('apollo-link-error').onError;
 const InMemoryCache = require('apollo-cache-inmemory').InMemoryCache;
 //const createPersistedQueryLink = require('apollo-link-persisted-queries');
 
-const onFailCallback = ({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    const handler = ({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
+const getErrorHandler = logger => {
+  if (!logger || typeof logger !== 'object' || typeof logger.error !== 'function') {
+    logger = console;
+  };
 
-    graphQLErrors.forEach(handler);
-  }
+  return ({ /*operation, response, */graphQLErrors, networkError }) => {
 
-  if (networkError) {
-    console.log(`[Network error]: ${networkError}`);
+    if (graphQLErrors) {
+      const handler = ({ message, locations, path }) =>
+        logger.error(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        );
+
+      graphQLErrors.forEach(handler);
+    }
+
+    if (networkError) {
+      logger.error(`[Network error]: ${networkError}`);
+    }
   }
 };
 
-module.exports = (uri, agentOptions) => {
+module.exports = (uri, agentOptions, logger) => {
   const agent = new https.Agent(agentOptions);
 
   const fnFetch = (fetchUri, fetchOptions) =>
@@ -39,7 +46,7 @@ module.exports = (uri, agentOptions) => {
   });
 
   const link = ApolloLink.from([
-    onError(onFailCallback),
+    onError(getErrorHandler(logger)),
     // createPersistedQueryLink({ useGETForHashedQueries: true }),
     httpLink
   ]);
