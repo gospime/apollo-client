@@ -45,11 +45,11 @@ module.exports = (uri, agentOptions, logger) => {
     credentials: 'same-origin'
   });
 
-  const link = ApolloLink.from([
-    onError(getErrorHandler(logger)),
-    // createPersistedQueryLink({ useGETForHashedQueries: true }),
-    httpLink
-  ]);
+  const onErrorFn = onError(getErrorHandler(logger));
+
+  //const persistedQuery = createPersistedQueryLink({ useGETForHashedQueries: true });
+
+  const link = ApolloLink.from([ onErrorFn,/* persistedQuery,*/ httpLink ]);
 
   const cache = new InMemoryCache();
   const ssrMode = true;
