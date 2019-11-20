@@ -47,19 +47,20 @@ module.exports = class Facade {
   /**
    * Facade to create instance of Apollo client
    */
-  static create(uri, agentOptions, logger) {
+  static create({ uri, token, agentOptions, logger }) {
     const agent = createAgent(agentOptions);
     const fetchFn = getFetchFn(agent);
     // https://github.com/github/fetch#sending-cookies
     const credentials = 'same-origin';
+    const headers = token ? { authorization: `Bearer ${token}` } : undefined;
 
-    const httpLink = new HttpLink({ fetch: fetchFn, uri, credentials });
+    const httpLink = new HttpLink({ fetch: fetchFn, uri, credentials, headers });
 
     const onErrorFn = onError(getErrorHandler(logger));
 
     //const persistedQuery = createPersistedQueryLink({ useGETForHashedQueries: true });
 
-    const link = ApolloLink.from([ onErrorFn,/* persistedQuery,*/ httpLink ]);
+    const link = ApolloLink.from([ onErrorFn/*, persistedQuery*/, httpLink ]);
 
     const cache = new InMemoryCache();
     const ssrMode = true;
