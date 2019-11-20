@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/gospime/apollo-client/compare/v1.2.1...v2.0.0) (2019-11-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Refactoring. Calling query and mutation. Ability to introspect a schema
+
+### Features
+
+* Refactoring. Calling query and mutation. Ability to introspect a schema ([9577096](https://github.com/gospime/apollo-client/commit/957709623f1454c584ed5b268fb872640250fff0))
+
 ### [1.2.1](https://github.com/gospime/apollo-client/compare/v1.2.0...v1.2.1) (2019-11-20)
 
 
