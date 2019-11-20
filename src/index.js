@@ -10,6 +10,9 @@ const onError = require('apollo-link-error').onError;
 const InMemoryCache = require('apollo-cache-inmemory').InMemoryCache;
 //const createPersistedQueryLink = require('apollo-link-persisted-queries');
 
+const gql = require('graphql-tag');
+const introspectionQuery = require('graphql').introspectionQuery;
+
 const getErrorHandler = logger => {
   if (!logger || typeof logger !== 'object' || typeof logger.error !== 'function') {
     logger = console;
@@ -32,27 +35,119 @@ const getErrorHandler = logger => {
   }
 };
 
-module.exports = (uri, agentOptions, logger) => {
-  const agent = new https.Agent(agentOptions);
+const createAgent = options => new https.Agent(options);
+const getFetchFn = agent =>
+  (fetchUri, fetchOptions) => fetch(fetchUri, { ...fetchOptions, agent });
 
-  const fnFetch = (fetchUri, fetchOptions) =>
-    fetch(fetchUri, { ...fetchOptions, agent });
+module.exports = class Facade {
+  constructor(client) {
+    this.client = client;
+  }
 
-  const httpLink = new HttpLink({
-    fetch: fnFetch,
-    uri,
+  /**
+   * Facade to create instance of Apollo client
+   */
+  static create(uri, agentOptions, logger) {
+    const agent = createAgent(agentOptions);
+    const fetchFn = getFetchFn(agent);
     // https://github.com/github/fetch#sending-cookies
-    credentials: 'same-origin'
-  });
+    const credentials = 'same-origin';
 
-  const onErrorFn = onError(getErrorHandler(logger));
+    const httpLink = new HttpLink({ fetch: fetchFn, uri, credentials });
 
-  //const persistedQuery = createPersistedQueryLink({ useGETForHashedQueries: true });
+    const onErrorFn = onError(getErrorHandler(logger));
 
-  const link = ApolloLink.from([ onErrorFn,/* persistedQuery,*/ httpLink ]);
+    //const persistedQuery = createPersistedQueryLink({ useGETForHashedQueries: true });
 
-  const cache = new InMemoryCache();
-  const ssrMode = true;
+    const link = ApolloLink.from([ onErrorFn,/* persistedQuery,*/ httpLink ]);
 
-  return new ApolloClient({ ssrMode, link, cache });
+    const cache = new InMemoryCache();
+    const ssrMode = true;
+
+    const client = new ApolloClient(
+      { ssrMode, link, cache }
+    );
+
+    return new Facade(client);
+  }
+
+  introspect() {
+    const query = gql`${introspectionQuery}`;
+    return this.client.query({ query });
+  }
+
+  query({ plan, args, fields }) {
+    const body = this.build(plan, args, fields);
+    const query = gql`query { ${body} }`;
+
+    return this.client.query({ query });
+  }
+
+  mutate({ plan, args, fields }) {
+    const body = this.build(plan, args, fields);
+    const mutation = gql`mutation { ${body} }`;
+
+    return this.client.mutate({ mutation });
+  }
+
+  build(plan, args, fields) {
+    const _args = this.parseArguments(args);
+    const _fields = this.parseFields(fields);
+
+    let query = plan;
+    if (_args) query += `( ${_args} )`;
+    if (_fields) query += `{ ${_fields} }`;
+
+    return query;
+  }
+
+  parseArguments(data = {}) {
+    if (!data || typeof data !=='object') {
+      return '';
+    }
+
+    const mapped = [];
+
+    const mapper = ([key, value]) => {
+      if (!value) return;
+
+      let _value = '';
+
+      if (typeof value === 'string') {
+        _value = `"${value}"`;
+      } else if (Array.isArray(value)) {
+        const formatted = value
+          .map(item => `"${item}"`)
+          .join(', ');
+
+        _value = `[${formatted}]`;
+      }
+
+      mapped.push(`${key}: ${_value}`);
+    };
+
+    Object.entries(data).map(mapper);
+
+    return mapped.join(', ');
+  }
+
+  parseFields(fields = []) {
+    if (!fields || !Array.isArray(fields)) {
+      return '';
+    }
+
+    const mapped = [];
+
+    const mapper = field => {
+      if (!field) return;
+
+      if (typeof field === 'string') {
+        mapped.push(field);
+      }
+    };
+
+    Object.values(fields).map(mapper);
+
+    return mapped.join(' ');
+  }
 };
