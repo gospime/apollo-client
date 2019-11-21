@@ -114,17 +114,26 @@ module.exports = class Facade {
 
       let _value = '';
 
-      if (typeof value === 'string') {
-        _value = `"${value}"`;
-      } else if (Array.isArray(value)) {
+      if (Array.isArray(value)) {
         const formatted = value
           .map(item => `"${item}"`)
           .join(', ');
 
         _value = `[${formatted}]`;
+      } else {
+        switch (typeof value) {
+          case 'string':
+            _value = `"${value}"`;
+            break;
+          case 'boolean':
+            _value = value;
+            break;
+        }
       }
 
-      mapped.push(`${key}: ${_value}`);
+      if (_value) {
+        mapped.push(`${key}: ${_value}`);
+      }
     };
 
     Object.entries(data).map(mapper);
