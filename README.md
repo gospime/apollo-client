@@ -11,6 +11,22 @@ const options = {
 
 ```
 
+ApolloOptions:
+[fetch-policy](https://medium.com/@galen.corey/understanding-apollo-fetch-policies-705b5ad71980)
+```node
+const apolloOptions = {
+  query: {
+    // How you want your component to interact with the Apollo cache.
+    // Defaults to "cache-first".
+    fetchPolicy: 'no-cache',
+    // How you want your component to handle network and GraphQL errors.
+    // Defaults to "none", which means we treat GraphQL errors as runtime errors.
+    errorPolicy: 'all',
+  }
+};
+
+```
+
 Example: how to execute graphql `query`
 ```node
 const Client = require('@gospime/apollo-client');
@@ -21,7 +37,7 @@ const fields = { fullname, email }; // fields to select
 
 // calling of `query` method
 Client
-  .create(uri, options)
+  .create(uri, options, apolloOptions)
   .query({ plan, args, fields })
   .then(result => console.log(result))
   .catch(error => console.error(error));
@@ -36,7 +52,7 @@ const args = { id: 2, fullname: 'new fullname' }; // find user by `id` and updat
 
 // calling of `mutate` method
 Client
-  .create(uri, options)
+  .create(uri, options, apolloOptions)
   .mutate({ plan, args })
   .then(result => console.log(result))
   .catch(error => console.error(error));
