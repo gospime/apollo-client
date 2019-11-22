@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.1](https://github.com/gospime/apollo-client/compare/v2.3.0...v2.3.1) (2019-11-22)
+
+
+### Bug Fixes
+
+* renamed apolloOptions  to defaultOptions ([299172e](https://github.com/gospime/apollo-client/commit/299172e26cb67464447480afc39baf59d4b1dcf5))
+
 ## [2.3.0](https://github.com/gospime/apollo-client/compare/v2.2.0...v2.3.0) (2019-11-22)
 
 
