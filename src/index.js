@@ -47,7 +47,7 @@ module.exports = class Facade {
   /**
    * Facade to create instance of Apollo client
    */
-  static create({ uri, token, agentOptions, apolloOptions, logger }) {
+  static create({ uri, token, agentOptions, defaultOptions, logger }) {
     const agent = createAgent(agentOptions);
     const fetchFn = getFetchFn(agent);
     // https://github.com/github/fetch#sending-cookies
@@ -66,7 +66,7 @@ module.exports = class Facade {
     const ssrMode = true;
 
     const client = new ApolloClient(
-      { ssrMode, link, cache, apolloOptions }
+      { ssrMode, link, cache, defaultOptions }
     );
 
     return new Facade(client);
