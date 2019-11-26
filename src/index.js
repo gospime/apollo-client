@@ -120,6 +120,8 @@ module.exports = class Facade {
           .join(', ');
 
         _value = `[${formatted}]`;
+      } else if (typeof value === 'object') {
+        _value = `{ ${this.parseArguments(value)} }`;
       } else {
         switch (typeof value) {
           case 'string':
