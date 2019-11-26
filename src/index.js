@@ -123,7 +123,9 @@ module.exports = class Facade {
       } else {
         switch (typeof value) {
           case 'string':
-            _value = `"${value}"`;
+            _value = value === value.toUpperCase()
+              ? `${value}` // as Enum option, must be like a constant
+              : `"${value}"`; // must be lile a string value
             break;
           case 'boolean':
             _value = value;
