@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/gospime/apollo-client/compare/v2.3.1...v2.4.0) (2019-11-26)
+
+
+### Features
+
+* implemented ability to set enum values ([8184233](https://github.com/gospime/apollo-client/commit/81842332861ed0e912e008e2600051ad19852383))
+
 ### [2.3.1](https://github.com/gospime/apollo-client/compare/v2.3.0...v2.3.1) (2019-11-22)
 
 
