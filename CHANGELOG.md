@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/gospime/apollo-client/compare/v2.4.0...v2.5.0) (2019-11-26)
+
+
+### Features
+
+* parse object in arguments - ability to have mutation input Objects ([b9ae921](https://github.com/gospime/apollo-client/commit/b9ae921e86f70fae318dff782ecb2d4feb5936f2))
+
 ## [2.4.0](https://github.com/gospime/apollo-client/compare/v2.3.1...v2.4.0) (2019-11-26)
 
 
