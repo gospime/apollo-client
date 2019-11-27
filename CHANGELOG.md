@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.1](https://github.com/gospime/apollo-client/compare/v2.5.0...v2.5.1) (2019-11-27)
+
+
+### Bug Fixes
+
+* parsing of Date values in arguments ([0fad8da](https://github.com/gospime/apollo-client/commit/0fad8da8f70b3be79e35b3f5723136a7faceed62))
+
 ## [2.5.0](https://github.com/gospime/apollo-client/compare/v2.4.0...v2.5.0) (2019-11-26)
 
 
