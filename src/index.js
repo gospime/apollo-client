@@ -154,15 +154,24 @@ module.exports = class Facade {
 
     const mapped = [];
 
-    const mapper = field => {
+    const mapperSub = ([key, subfields]) => {
+      return mapped.push(`${key}: { ${this.parseFields(subfields)} }`);
+    }
+
+    const mapperRoot = field => {
       if (!field) return;
 
-      if (typeof field === 'string') {
-        mapped.push(field);
+      switch (typeof field) {
+        case 'object':
+          Object.entries(field).map(mapperSub);
+          break;
+        case 'string':
+          mapped.push(field);
+          break;
       }
     };
 
-    Object.values(fields).map(mapper);
+    Object.values(fields).map(mapperRoot);
 
     return mapped.join(' ');
   }
