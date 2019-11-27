@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/gospime/apollo-client/compare/v2.5.1...v2.6.0) (2019-11-27)
+
+
+### Features
+
+* added ability to select nested data ([f6a4ca3](https://github.com/gospime/apollo-client/commit/f6a4ca3ab3706aa1730d41d8af6a04f47ffb3401))
+
 ### [2.5.1](https://github.com/gospime/apollo-client/compare/v2.5.0...v2.5.1) (2019-11-27)
 
 
