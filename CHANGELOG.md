@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/gospime/apollo-client/compare/v2.6.0...v2.6.1) (2019-11-27)
+
+
+### Bug Fixes
+
+* removed typo ([05e742c](https://github.com/gospime/apollo-client/commit/05e742c72789ab2d80c79da9352ec7197aa98cb2))
+
 ## [2.6.0](https://github.com/gospime/apollo-client/compare/v2.5.1...v2.6.0) (2019-11-27)
 
 
