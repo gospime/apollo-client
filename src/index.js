@@ -121,7 +121,9 @@ module.exports = class Facade {
 
         _value = `[${formatted}]`;
       } else if (typeof value === 'object') {
-        _value = `{ ${this.parseArguments(value)} }`;
+        _value = value instanceof Date
+          ? `"${value.toISOString()}"`
+          : `{ ${this.parseArguments(value)} }`;
       } else {
         switch (typeof value) {
           case 'string':
