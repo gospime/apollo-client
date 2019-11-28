@@ -62,7 +62,7 @@ module.exports = class Facade {
 
     const link = ApolloLink.from([ onErrorFn/*, persistedQuery*/, httpLink ]);
 
-    const cache = new InMemoryCache();
+    const cache = new InMemoryCache({ addTypename: false });
     const ssrMode = true;
 
     const client = new ApolloClient(
