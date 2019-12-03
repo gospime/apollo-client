@@ -57,3 +57,7 @@ Client
   .then(result => console.log(result))
   .catch(error => console.error(error));
 ```
+Async/await example:
+```node
+async () => await Client.create(uri, options, apolloOptions).mutate({ plan, args });
+```
