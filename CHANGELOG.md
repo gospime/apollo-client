@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.4](https://github.com/gospime/apollo-client/compare/v2.6.3...v2.6.4) (2020-01-13)
+
+
+### Bug Fixes
+
+* fixed problem with input argumentes like IP ([5a35cf6](https://github.com/gospime/apollo-client/commit/5a35cf62614c2ba821bc3af0993ea7e9ff8a4d8c))
+
 ### [2.6.3](https://github.com/gospime/apollo-client/compare/v2.6.2...v2.6.3) (2019-12-19)
 
 ### [2.6.2](https://github.com/gospime/apollo-client/compare/v2.6.1...v2.6.2) (2019-11-28)
