@@ -1,3 +1,4 @@
+const net = require('net');
 const https = require('https');
 const fetch = require('node-fetch');
 
@@ -127,7 +128,8 @@ module.exports = class Facade {
       } else {
         switch (typeof value) {
           case 'string':
-            _value = value === value.toUpperCase()
+            // avoid invalid mapping for value like IP or constant
+            _value = !net.isIP(value) && (value === value.toUpperCase())
               ? `${value}` // as Enum option, must be like a constant
               : `"${value}"`; // must be lile a string value
             break;
