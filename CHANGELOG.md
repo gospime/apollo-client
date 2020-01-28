@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/gospime/apollo-client/compare/v2.6.4...v3.0.0) (2020-01-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* ability to parse constants as symbols
+
+### Features
+
+* ability to parse constants as symbols ([9cef362](https://github.com/gospime/apollo-client/commit/9cef3620a15b88b598f80d2a46a873bb255e6c10))
+
 ### [2.6.4](https://github.com/gospime/apollo-client/compare/v2.6.3...v2.6.4) (2020-01-13)
 
 
