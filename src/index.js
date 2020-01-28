@@ -1,4 +1,3 @@
-const net = require('net');
 const https = require('https');
 const fetch = require('node-fetch');
 
@@ -121,17 +120,21 @@ module.exports = class Facade {
           .join(', ');
 
         _value = `[${formatted}]`;
-      } else if (typeof value === 'object') {
-        _value = value instanceof Date
-          ? `"${value.toISOString()}"`
-          : `{ ${this.parseArguments(value)} }`;
       } else {
         switch (typeof value) {
+          case 'object':
+            _value = value instanceof Date
+              ? `"${value.toISOString()}"`
+              : `{ ${this.parseArguments(value)} }`;
+            break;
+          case 'symbol':
+            const v = value.description || null;
+            _value = v === v.toUpperCase()
+              ? `${v}` // as a constant
+              : `"${v}"`; // simple string
+            break;
           case 'string':
-            // avoid invalid mapping for value like IP or constant
-            _value = !net.isIP(value) && (value === value.toUpperCase())
-              ? `${value}` // as Enum option, must be like a constant
-              : `"${value}"`; // must be lile a string value
+            _value = `"${value}"`;
             break;
           case 'boolean':
             _value = value;
