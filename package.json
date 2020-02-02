@@ -1,6 +1,6 @@
 {
   "name": "@gospime/apollo-client",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Apollo HTTP client with response caching",
   "keywords": [
     "gospime",

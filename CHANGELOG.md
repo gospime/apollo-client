@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/gospime/apollo-client/compare/v3.0.0...v3.0.1) (2020-02-02)
+
+
+### Bug Fixes
+
+* parse nummber value as argument ([1a08d30](https://github.com/gospime/apollo-client/commit/1a08d30de07dac9919d822e9442e764664dc4f8c))
+
 ## [3.0.0](https://github.com/gospime/apollo-client/compare/v2.6.4...v3.0.0) (2020-01-28)
 
 
