@@ -136,6 +136,7 @@ module.exports = class Facade {
           case 'string':
             _value = `"${value}"`;
             break;
+          case 'number':
           case 'boolean':
             _value = value;
             break;
