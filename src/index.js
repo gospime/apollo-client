@@ -2,7 +2,7 @@ const https = require('https');
 const fetch = require('node-fetch');
 
 // const ApolloClient = require('@apollo/client').ApolloClient; // @todo: use it in future
-const ApolloClient = require('apollo-client').ApolloClient;
+const ApolloClient = require('@apollo/client').ApolloClient;
 
 const ApolloLink = require('apollo-link').ApolloLink;
 const HttpLink = require('apollo-link-http').HttpLink;
