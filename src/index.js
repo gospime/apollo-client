@@ -102,6 +102,12 @@ module.exports = class Facade {
     return query;
   }
 
+  escapeValue(value) {
+    return typeof value === 'string'
+      ? value.replace(/\\/g, '\\\\').replace(/\"/g, '\\"')
+      : value;
+  }
+
   parseArguments(data = {}) {
     if (!data || typeof data !=='object') {
       return '';
@@ -116,7 +122,7 @@ module.exports = class Facade {
 
       if (Array.isArray(value)) {
         const formatted = value
-          .map(item => `"${item}"`)
+          .map(item => `"${this.escapeValue(item)}"`)
           .join(', ');
 
         _value = `[${formatted}]`;
@@ -130,11 +136,11 @@ module.exports = class Facade {
           case 'symbol':
             const v = value.description || null;
             _value = v === v.toUpperCase()
-              ? `${v}` // as a constant
-              : `"${v}"`; // simple string
+              ? `${this.escapeValue(v)}` // as a constant
+              : `"${this.escapeValue(v)}"`; // simple string
             break;
           case 'string':
-            _value = `"${value}"`;
+            _value = `"${this.escapeValue(value)}"`;
             break;
           case 'number':
           case 'boolean':
