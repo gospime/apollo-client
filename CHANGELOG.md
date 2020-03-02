@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/gospime/apollo-client/compare/v3.0.3...v4.0.0) (2020-03-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* escape string values
+
+### Features
+
+* escape string values ([38d86c8](https://github.com/gospime/apollo-client/commit/38d86c807236498503241793f7ffedb2918f1615))
+
 ### [3.0.3](https://github.com/gospime/apollo-client/compare/v3.0.2...v3.0.3) (2020-03-02)
 
 ### [3.0.2](https://github.com/gospime/apollo-client/compare/v3.0.1...v3.0.2) (2020-02-19)
