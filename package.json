@@ -35,7 +35,7 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "@apollo/client": "^3.0.0-beta.38",
+    "@apollo/client": "^3.0.0-beta.41",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-link": "^1.2.13",
     "apollo-link-error": "^1.1.12",
@@ -43,5 +43,8 @@
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
     "node-fetch": "^2.6.0"
+  },
+  "optionalDependencies": {
+    "minimist": "^1.2.5"
   }
 }
